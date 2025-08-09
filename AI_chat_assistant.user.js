@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         AI助手
 // @version      3.0.0
-// @author       XD06
 // @description  自定义AI助手
+// @author       XD06
 // @match        *://*/*
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -4949,4 +4949,5 @@ function getRandomHeaders() {
 
     return messageContainer;
   }
+
 
