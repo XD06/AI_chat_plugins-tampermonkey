@@ -7,10 +7,6 @@
 
 > 🚀 **这是一个专为Tampermonkey/Greasemonkey设计的用户脚本** - 为任何网页添加强大的AI聊天功能，支持代码执行、网页内容提取、对话管理等高级特性。
 
-## 🎯 什么是用户脚本？
-
-用户脚本(UserScript)是运行在浏览器中的小程序，可以修改网页功能、添加新特性或自动化操作。本项目是一个**Tampermonkey/Greasemonkey用户脚本**，无需安装任何软件，只需浏览器扩展即可运行。
-
 ## 🚀 一键安装
 
 ### 📦 立即安装脚本
@@ -371,5 +367,6 @@ AI聊天助手是一个基于用户脚本的智能聊天工具，可以在**任�
 **🎉 感谢使用AI聊天助手！** 
 
 如果这个项目对您有帮助，请考虑给我们一个⭐Star，这是对开发者最大的鼓励！
+
 
 **⚡ 快速体验**: [安装脚本](https://github.com/XD06/AI_chat_plugins-tampermonkey-/raw/main/AI_chat_assistant.user.js) → 配置API → 开始对话 → 享受AI助手的强大功能 
