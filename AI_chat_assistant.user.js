@@ -2162,28 +2162,55 @@ width:10%;
     }
   }, { passive: false });
 
-  document.addEventListener('touchend', () => {
+  // 这是修改后的代码 (已修复)
+document.addEventListener('touchend', (e) => { // 添加 e 参数
     if (isDragging) {
-        isDragging = false;
-        // 停止应用 will-change 以释放资源
-        icon.style.willChange = 'auto';
-        icon.style.transition = ''; // 恢复过渡动画
-
-        // 移除拖动中的CSS类
-        icon.classList.remove('dragging');
-
-        // 保存图标位置
-        if (hasMoved) {
-            const rightValue = parseFloat(icon.style.right);
-            const bottomValue = parseFloat(icon.style.bottom);
-
-            if (!isNaN(rightValue) && !isNaN(bottomValue)) {
-                GM_setValue('iconRight', rightValue);
-                GM_setValue('iconBottom', bottomValue);
+        // --- 核心逻辑：判断是点击还是拖动 ---
+        if (!hasMoved) {
+            // 这是一次点击 (Tap)，而不是拖动
+            console.log("检测到移动端单击事件 (在 touchend 中)");
+            const isActive = chatWindow.classList.contains('active');
+            if (!isActive) {
+                // 打开窗口的逻辑
+                chatWindow.classList.add('active');
+                chatWindow.style.display = 'flex';
+                icon.style.display = 'none';
+                requestAnimationFrame(() => {
+                    try {
+                        positionChatWindow();
+                    } catch (positionError) {
+                        console.error("定位窗口时出错:", positionError);
+                    }
+                });
+            } else {
+                // 关闭窗口的逻辑
+                chatWindow.classList.remove('active');
+                chatWindow.style.display = 'none';
+                icon.style.display = 'flex';
             }
+            // 阻止后续可能触发的 "click" 事件，防止双击效果
+            e.preventDefault(); 
+        } else {
+             // 这是一次拖动，保存位置
+             console.log("检测到移动端拖拽，保存位置。");
+             const rightValue = parseFloat(icon.style.right);
+             const bottomValue = parseFloat(icon.style.bottom);
+
+             if (!isNaN(rightValue) && !isNaN(bottomValue)) {
+                 GM_setValue('iconRight', rightValue);
+                 GM_setValue('iconBottom', bottomValue);
+             }
         }
+        // --- 核心逻辑结束 ---
+
+        // 清理工作
+        isDragging = false;
+        hasMoved = false; // 为下一次交互重置状态
+        icon.style.willChange = 'auto';
+        icon.style.transition = ''; 
+        icon.classList.remove('dragging');
     }
-  });
+});
 
   // 触摸取消事件处理
   document.addEventListener('touchcancel', () => {
@@ -4949,5 +4976,6 @@ function getRandomHeaders() {
 
     return messageContainer;
   }
+
 
 
