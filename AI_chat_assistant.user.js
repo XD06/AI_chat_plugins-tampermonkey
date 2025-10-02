@@ -4152,6 +4152,7 @@ const customParamsSection = document.createElement('div');
         }
 
         readStream();
+        stopButton.remove();
     });
   }
 //随机头
@@ -4378,6 +4379,7 @@ function getRandomHeaders() {
 
                 onerror: (error) => {
                     clearTimeout(timeoutId);
+                    stopButton.remove();
                     chatContent.removeChild(thinkingMsgDiv);
                     const existingStopButton = document.querySelector('.ds-stop-button');
                     if (existingStopButton) existingStopButton.remove();
@@ -4385,6 +4387,7 @@ function getRandomHeaders() {
                 },
                 ontimeout: () => {
                     clearTimeout(timeoutId);
+                    stopButton.remove();
                     const existingStopButton = document.querySelector('.ds-stop-button');
                     if (existingStopButton) existingStopButton.remove();
                     chatContent.removeChild(thinkingMsgDiv);
@@ -4976,6 +4979,7 @@ function getRandomHeaders() {
 
     return messageContainer;
   }
+
 
 
 
